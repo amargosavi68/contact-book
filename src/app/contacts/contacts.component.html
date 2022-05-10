@@ -1,6 +1,6 @@
 <div class="container my-3">
   <h2>Contacts</h2>
-  <ul *ngIf="contacts.length" class="list-group">
+  <ul *ngIf="contacts?.length" class="list-group">
     <li [class]="contact.email === selectedContact?.email ? listSelectedClass : listClass" style="cursor: pointer;"
       *ngFor="let contact of contacts" (click)="onContactClicked(contact)">{{contact.name}}</li>
   </ul>

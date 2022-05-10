@@ -13,6 +13,7 @@ export class EditContactComponent implements OnInit {
   selectedContact!: Contact
 
   contactForm!: FormGroup;
+  message = "";
 
   constructor(private contactService: ContactService, private router: Router, private fb: FormBuilder) {  }
 
@@ -35,7 +36,25 @@ export class EditContactComponent implements OnInit {
   }
 
   updateContact(): void {
+    const val = this.contactForm.value;
 
+    const updateContact = {
+      _id: this.selectedContact._id,
+      name: val.name,
+      email: val.email,
+      phone: {
+        mobile: val.phoneMobile,
+        work: val.phoneWork,
+        _id: this.selectedContact.phone._id
+      }
+    }
+    console.log(updateContact);
+    this.contactService.updateContact(updateContact).subscribe(resp => {
+      this.message = resp;
+      setTimeout(() => {
+        this.message = ""
+      }, 4000);
+    });
   }
 
 }

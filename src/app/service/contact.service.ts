@@ -1,12 +1,15 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 
 export interface Contact {
+  _id?: string,
   name: string,
   email: string,
   phone: {
     work: string,
-    mobile: string
+    mobile: string,
+    _id?: string
   }
 }
 
@@ -15,28 +18,17 @@ export interface Contact {
 })
 export class ContactService {
 
-  private contacts: Contact[] = [
-    {
-      name: 'Amar',
-      email: 'Amar@gosavi.com',
-      phone: {
-        work: '255-262919',
-        mobile: '1111122222'
-      }
-    },
-    {
-      name: 'Sarvesha',
-      email: 'saru@sawant.com',
-      phone: {
-        work: '255-321212',
-        mobile: '9922992299'
-      }
-    }
-  ]
+  backendURL: string = "http://localhost:3000";
 
-  constructor() { }
+  private contacts!: Contact[];
+
+  constructor(private http: HttpClient) { }
 
   getContacts(): Observable<Contact[]> {
-    return of(this.contacts);
+    return this.http.get<Contact[]>(this.backendURL+"/contacts");
+  }
+
+  updateContact(contact: Contact): Observable<string> {
+    return this.http.put<string>(this.backendURL+"/editcontact", contact);
   }
 }
