@@ -1,0 +1,8 @@
+<div class="container my-3">
+  <h1>Contacts</h1>
+  <ul *ngIf="contacts.length" class="list-group">
+    <li [class]="contact.email === selectedContact?.email ? listSelectedClass : listClass" style="cursor: pointer;"
+      *ngFor="let contact of contacts" (click)="onContactClicked(contact)">{{contact.name}}</li>
+  </ul>
+  <button class="btn btn-warning mt-4" (click)="onEditBtnClick()">Edit</button>
+</div>
