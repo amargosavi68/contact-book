@@ -39,8 +39,8 @@ export class ContactsComponent implements OnInit {
   onEditBtnClick(): void {
     this.router.navigate(['/edit'], {
       state: {
-        selectedContact: JSON.stringify(this.selectedContact)
-      }
+        selectedContact: JSON.stringify(this.selectedContact),
+      },
     })
   }
 
